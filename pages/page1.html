@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival Prediction</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body style="margin-left: 600px;margin-top: 100px;">
+
+    <h1 style="color:red;margin-left:-90px;">Dengue Prediction System</h1>
+   <!--"skin_rash", "lethargy", "nodal_skin_eruptions", "continuous_sneezing", "shivering", 
+    "chills", "joint_pain", "vomiting", "fatigue", "high_fever", "sweating", 
+    "headache", "nausea", "loss_of_appetite", "pain_behind_the_eyes", "back_pain", "constipation", 
+    "abdominal_pain", "diarrhoea", "mild_fever", "swelled_lymph_nodes", "malaise", "toxic_look_(typhos)", 
+    "muscle_pain", "red_spots_over_body", "belly_pain", "dischromic _patches", "watering_from_eyes"-->
+    <form method="post" class ="form1"action="/predict">
+        <label for="feature0">Skin Rash:</label><br>
+        <input type="text" name="0" required><br>
+
+        <label for="feature1">Lethargy:</label><br>
+        <input type="text" name="1" required><br>
+
+        <label for="feature2">Nordal Skin Eruption:</label><br>
+        <input type="number" style="width:190px;" name="2" max="1" min="0"  required><br>
+
+        <label for="feature3">Continuous sneezing:</label><br>
+        <input type="text" name="3" required><br>
+
+        <label for="feature4">Shivering:</label><br>
+        <input type="text" name="4" required><br>
+
+        <label for="feature5">Chills:</label><br>
+        <input type="text" name="5" required><br>
+
+        <label for="feature6">Joint Pain:</label><br>
+        <input type="text" name="6" required><br>
+
+        <label for="feature6">Vomiting:</label><br>
+        <input type="text" name="7" required><br><br>
+       <button  style="width: 200px;" type="submit" class="btn btn-primary">Primary</button>
+
+    </form>
+    <br>
+
+    {% if result %}
+        <p style="color:blue">Prediction: {{ result }}</p>
+    {% endif %}
+
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
