@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Light grey background color */
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 500px;
+    margin: 100px auto;
+    background-color: #ffffff; /* White background color for the form */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Box shadow for a subtle effect */
+}
+
+.container h1 {
+    color: #ff69b4; /* Pink color for the title */
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.form-label {
+    font-weight: bold;
+    color: #495057; /* Dark grey color for labels */
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ced4da; /* Light grey border */
+    border-radius: 5px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #ff69b4; /* Pink border color on focus */
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(255,105,180,0.25); /* Pink box shadow on focus */
+}
+
+.container .btn-primary {
+    background-color: #ff69b4; /* Pink background color for button */
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s; /* Smooth transition on hover */
+}
+
+
+
+.container .btn-primary:hover {
+    background-color: #ff1493; /* Darker pink on hover */
+}
