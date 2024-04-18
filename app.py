@@ -11,7 +11,7 @@ model = pickle.load(open(model_path, 'rb'))
 def home():
     return render_template('index.html')
 
-@app.route('/predict', methods=['POST'])
+@app.route('/dengueprediction', methods=['POST'])
 def predict():
     feature_names = ['0', '1', '2', '3', '4', '5', '6','7', '8', '9', '10']
 
