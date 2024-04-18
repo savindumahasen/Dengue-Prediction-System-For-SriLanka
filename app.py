@@ -18,7 +18,7 @@ def predict():
     try:
         features = [float(request.form[f]) for f in feature_names]
     except ValueError:
-        return render_template('./pages/index.html', error="Invalid input. Please enter numeric values.")
+        return render_template('./templates/index.html')
 
     input_data = [features]
 
