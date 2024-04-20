@@ -78,15 +78,9 @@
             margin-bottom: 20px; /* Add space below the prediction result */
             color: green; /* Set default color to green */
         }
-
-        /* Style for infected dengue prediction result */
-        .prediction-result-infected {
-            color: red; /* Set color to red for infected prediction */
-        }
-        
-        /* Style for non-infected dengue prediction result */
-        .prediction-result-not-infected {
-            color: green; /* Set color to green for non-infected prediction */
+        .modal-title{
+            color: #0056b3;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -189,8 +183,6 @@
                 </select>
             </div>
 
-            <!-- Add more fields here as needed -->
-
         </div>
 
         <button type="submit">Predict</button>
@@ -230,6 +222,7 @@
                     // Set the color and message based on the result
                     if (result === 'Infected') {
                         predictionMessage.classList.add('prediction-result-infected');
+                       
                     } else {
                         predictionMessage.classList.add('prediction-result-not-infected');
                     }
