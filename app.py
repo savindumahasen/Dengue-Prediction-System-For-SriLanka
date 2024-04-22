@@ -31,7 +31,7 @@ def predict():
     else:
         result = "Dengue is infected"
 
-    return render_template('index.html', result=result)
+    return render_template('test.html', result=result)
 
     webview.create_window('Flask to exe',app)
 
