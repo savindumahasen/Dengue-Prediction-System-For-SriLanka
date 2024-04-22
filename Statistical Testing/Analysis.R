@@ -1,7 +1,7 @@
 
 ## Import the dataset
 
-dengue_data <- read.csv("DataSet.csv")
+dengue_data <- read.csv("DengueDataset.csv")
 dengue_data
 
 View(dengue_data)
@@ -35,9 +35,9 @@ shapiro.test(prognosis)
 ## anderson darling testing for skin rash
 ad.test(skin_rash)
 ## lillifor testing for skin rash
-lillie.test(prognosis)
+lillie.test(skin_rash)
 ## shapiro wiki testing for skin rash
-shapiro.test(prognosis)
+shapiro.test(skin_rash)
 
 ## anderson darling testing for High fever
 ad.test(high_fever)
@@ -62,8 +62,6 @@ lillie.test(nausea)
 ## shapiro wiki testing for Nausea
 shapiro.test(nausea)
 
-# "loss_of_appetite", "pain_behind_the_eyes", "back_pain", "malaise", 
-#"muscle_pain", "red_spots_over_body"]]
 
 ## anderson darling testing for loss_of_appetite
 ad.test(loss_of_appetite)
@@ -111,3 +109,36 @@ lillie.test(red_spots_over_body)
 ## shapiro wiki testing red_spots_over_body
 shapiro.test(red_spots_over_body)
 
+
+## Correlational Analysis
+
+cor.test(prognosis,skin_rash, method="spearman",alternative="two.sided")
+
+cor.test(prognosis,high_fever, method="spearman",alternative="two.sided")
+
+cor.test(prognosis, headache, method="spearman",alternative="two.sided")
+
+cor.test(prognosis,nausea, method="spearman",alternative="two.sided")
+
+cor.test(prognosis,loss_of_appetite, method="spearman",alternative="two.sided")
+
+cor.test(prognosis,pain_behind_the_eyes, method="spearman",alternative="two.sided")
+
+cor.test(prognosis,back_pain, method="spearman",alternative="two.sided")
+
+cor.test(prognosis,malaise, method="spearman",alternative="two.sided")
+
+cor.test(prognosis,muscle_pain, method="spearman",alternative="two.sided")
+
+cor.test(prognosis,red_spots_over_body, method="spearman",alternative="two.sided")
+
+## Multi linear regression model
+### Multi-linear model
+dengue_multi_linear_model <- lm(prognosis~skin_rash+
+                                     high_fever+headache+
+                                     nausea+loss_of_appetite+
+                                     pain_behind_the_eyes+back_pain+malaise+
+                                     muscle_pain+red_spots_over_body, model=TRUE)
+dengue_multi_linear_model
+
+summary(dengue_multi_linear_model)
