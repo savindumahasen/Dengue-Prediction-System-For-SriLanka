@@ -8,121 +8,128 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f9f9f9; /* Light grey background */
-            font-family: Arial, sans-serif; /* Set font family */
-            margin: 0; /* Remove default margin */
-            padding: 0; /* Remove default padding */
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         .container {
-            margin: 0 auto; /* Center the container horizontally */
-            max-width: 800px; /* Set maximum width for the container */
-            padding-top: 50px; /* Add space from the top */
+            margin: 0 auto;
+            max-width: 800px;
+            padding-top: 50px;
+            position: relative;
         }
 
         h1 {
-            color: red; /* Set title color to blue */
-            text-align: center; /* Center align the title */
-            margin-bottom: 40px; /* Add space below the title */
-            font-size: 36px; /* Increase font size */
-            text-transform: uppercase; /* Convert text to uppercase */
-            letter-spacing: 2px; /* Add letter spacing */
+            color: red;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             font-weight: bold;
         }
 
         form {
-            margin-top: 20px; /* Add space between title and form */
+            margin-top: 20px;
         }
 
         label {
-            font-weight: bold; /* Make labels bold */
-            display: block; /* Display labels as block elements */
-            margin-bottom: 5px; /* Add space below labels */
-            color: #333; /* Set label color */
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
         }
 
         select {
-            width: 100%; /* Set width for select fields */
-            padding: 10px; /* Add padding to input fields */
-            margin-bottom: 20px; /* Add space between input fields */
-            border: 1px solid #ccc; /* Add border to input fields */
-            border-radius: 4px; /* Add border radius */
-            box-sizing: border-box; /* Include padding and border in the width */
-            background-color: #fff; /* Set background color */
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #fff;
         }
 
         button {
-            width: 100%; /* Set button to take full width */
-            padding: 15px; /* Add padding to button */
-            border: none; /* Remove border */
-            background-color: #0056b3; /* Set button background color to blue */
-            color: #fff; /* Set button text color to white */
-            border-radius: 4px; /* Add border radius */
-            cursor: pointer; /* Change cursor to pointer on hover */
-            transition: background-color 0.3s ease; /* Add transition effect */
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background-color: #0056b3;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color: #003366; /* Darker background color on hover */
+            background-color: #003366;
         }
 
         p {
-            margin-top: 20px; /* Add space between prediction result and form */
-            text-align: center; /* Center align the prediction result */
-            font-size: 18px; /* Increase font size */
-            color: #333; /* Set text color */
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
         }
 
         .error-message {
-            color: red; /* Set error message color to red */
-            text-align: center; /* Center align the error message */
-            margin-top: 20px; /* Add space between error message and form */
+            color: red;
+            text-align: center;
+            margin-top: 20px;
         }
 
-        /* Style for prediction result */
         .prediction-result {
-            font-size: 24px; /* Increase font size */
-            font-weight: bold; /* Set font weight */
-            margin-bottom: 20px; /* Add space below the prediction result */
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
         }
 
-        /* Style for infected dengue prediction result */
         .prediction-result-infected {
-            color: red; /* Set color to red for infected prediction */
+            color: red;
         }
-        
-        /* Style for non-infected dengue prediction result */
+
         .prediction-result-not-infected {
-            color: green; /* Set color to green for non-infected prediction */
+            color: green;
         }
 
         /* Modal Styles */
         .modal-content {
-            background-color: #fff; /* Set modal background color */
-            border-radius: 8px; /* Add border radius */
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1); /* Add box shadow */
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .modal-header {
-            background-color: #0056b3; /* Set modal header background color to blue */
-            color: #fff; /* Set modal header text color to white */
-            border-top-left-radius: 8px; /* Add border radius to top left corner */
-            border-top-right-radius: 8px; /* Add border radius to top right corner */
-            padding: 15px; /* Add padding */
+            background-color: #0056b3;
+            color: #fff;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            padding: 15px;
         }
 
         .modal-title {
-            font-weight: bold; /* Set font weight */
-            font-size: 24px; /* Increase font size */
-            margin: 0; /* Remove margin */
+            font-weight: bold;
+            font-size: 24px;
+            margin: 0;
         }
 
         .modal-body {
-            padding: 20px; /* Add padding */
+            padding: 20px;
         }
 
+        .modal-dialog {
+          position: fixed;
+          right: 5px; /* Adjust the position to the right */
+          top: 40%;
+          transform: translateY(-50%);
+          width: 300px; /* Adjust the width */
+        }
+
+
         .btn-close {
-            color: #fff; /* Set close button text color to white */
+            color: #fff;
         }
     </style>
 </head>
@@ -133,101 +140,123 @@
    
     <form method="post" class="form1" action="/dengueprediction">
         <div class="row">
+            <!-- Feature 0: Skin Rash -->
             <div class="col-md-6">
                 <label for="feature0">Skin Rash:</label>
                 <select name="0" required>
+                    <option value="" selected disabled>Select value</option>
                     <option value="1">No</option>
                     <option value="0">Yes</option>
                 </select>
             </div>
 
+            <!-- Feature 1: Chills -->
             <div class="col-md-6">
                 <label for="feature1">Chills:</label>
                 <select name="1" required>
+                    <option value="" selected disabled>Select value</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
             </div>
 
+            <!-- Feature 2: High Fever -->
             <div class="col-md-6">
                 <label for="feature2">High Fever:</label>
                 <select name="2" required>
+                    <option value="" selected disabled>Select value</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
             </div>
 
+            <!-- Feature 3: Headache -->
             <div class="col-md-6">
                 <label for="feature3">Headache:</label>
                 <select name="3" required>
+                    <option value="" selected disabled>Select value</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
             </div>
 
+            <!-- Feature 4: Nausea -->
             <div class="col-md-6">
                 <label for="feature4">Nausea:</label>
                 <select name="4" required>
+                    <option value="" selected disabled>Select value</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
             </div>
 
+            <!-- Feature 5: Loss Of Appetite -->
             <div class="col-md-6">
                 <label for="feature5">Loss Of Appetite:</label>
                 <select name="5" required>
+                    <option value="" selected disabled>Select value</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
             </div>
 
+            <!-- Feature 6: Pain Behind of Eyes -->
             <div class="col-md-6">
                 <label for="feature6">Pain Behind of Eyes:</label>
                 <select name="6" required>
+                    <option value="" selected disabled>Select value</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
             </div>
 
+            <!-- Feature 7: Back Pain -->
             <div class="col-md-6">
                 <label for="feature7">Back Pain:</label>
                 <select name="7" required>
+                    <option value="" selected disabled>Select value</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
             </div>
 
+            <!-- Feature 8: Malaise -->
             <div class="col-md-6">
                 <label for="feature8">Malaise:</label>
                 <select name="8" required>
+                    <option value="" selected disabled>Select value</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
             </div>
 
+            <!-- Feature 9: Muscle Pain -->
             <div class="col-md-6">
                 <label for="feature9">Muscle Pain:</label>
                 <select name="9" required>
+                    <option value="" selected disabled>Select value</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
             </div>
 
+            <!-- Feature 10: Red Spots -->
             <div class="col-md-6">
                 <label for="feature10">Red Spots:</label>
                 <select name="10" required>
+                    <option value="" selected disabled>Select value</option>
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
             </div>
         </div>
 
-        <button type="submit">Predict</button>
+        <button type="button" id="predictButton">Predict</button>
     </form>
 
     <!-- Modal -->
     <div class="modal fade" id="predictionModal" tabindex="-1" aria-labelledby="predictionModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="predictionModalLabel">Prediction Result</h5>
@@ -245,37 +274,66 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Assign values to result and error variables
-        var result = "{{ result }}";
-        var error = "{{ error }}";
+        document.getElementById('predictButton').addEventListener('click', function() {
+            var selectElements = document.querySelectorAll('select');
+            var selectedValues = {};
+            var allSelected = true; // Flag to check if all select elements have been selected
 
-        // Check if result or error is present
-        document.addEventListener('DOMContentLoaded', function() {
-            if (result || error) {
-                var predictionMessage = document.getElementById('resultMessage');
-                var errorMessage = document.getElementById('errorMessage');
+            selectElements.forEach(function(select) {
+                if (select.value === '') {
+                    allSelected = false;
+                }
+                selectedValues[select.name] = select.value;
+            });
 
-                if (result) {
-                    // Set the color and message based on the result
-                    if (result === 'Infected') {
-                        predictionMessage.classList.add('prediction-result-infected');
-                    } else {
-                        predictionMessage.classList.add('prediction-result-not-infected');
+            if (!allSelected) {
+                alert('Please select a value for all features.');
+                return; // Exit the function if not all features are selected
+            }
+
+            sessionStorage.setItem('selectedValues', JSON.stringify(selectedValues));
+            
+            // Simulate prediction result
+            var result = Math.random() <= 0.5 ? 'Dengue Infected' : 'Dengue Not Infected';
+            var resultMessage = document.getElementById('resultMessage');
+            resultMessage.textContent = result;
+            
+            // Set color based on result
+            if (result === 'Dengue Infected') {
+                resultMessage.classList.add('prediction-result-infected');
+                resultMessage.classList.remove('prediction-result-not-infected');
+            } else {
+                resultMessage.classList.add('prediction-result-not-infected');
+                resultMessage.classList.remove('prediction-result-infected');
+            }
+            
+            var myModal = new bootstrap.Modal(document.getElementById('predictionModal'));
+            myModal.show();
+        });
+
+        // Reset select elements when modal is shown
+        document.getElementById('predictionModal').addEventListener('shown.bs.modal', function(event) {
+            var storedValues = sessionStorage.getItem('selectedValues');
+            if (storedValues) {
+                var selectedValues = JSON.parse(storedValues);
+                Object.keys(selectedValues).forEach(function(key) {
+                    var select = document.querySelector('select[name="' + key + '"]');
+                    if (select) {
+                        select.value = selectedValues[key];
                     }
-                    predictionMessage.textContent = result;
-                }
-
-                if (error) {
-                    errorMessage.textContent = error;
-                }
-
-                // Show the modal
-                var myModal = new bootstrap.Modal(document.getElementById('predictionModal'));
-                myModal.show();
+                });
             }
         });
+
+        // Reset select elements when modal is hidden
+        document.getElementById('predictionModal').addEventListener('hidden.bs.modal', function(event) {
+            var selectElements = document.querySelectorAll('select');
+            selectElements.forEach(function(select) {
+                select.selectedIndex = 0; // Reset to default value
+            });
+            sessionStorage.removeItem('selectedValues');
+        });
     </script>
-    
 </div>
 
 </body>
