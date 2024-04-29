@@ -13,23 +13,23 @@ SAMPLE_INPUT_DATA = {
 def test_predict_route():
     # Send a POST request to the predict route with sample input data
     response = requests.post(f'{BASE_URL}/dengueprediction', data=SAMPLE_INPUT_DATA)
-    response = requests.post(f'{BASE_URL}/dengueprediction', data=SAMPLE_INPUT_DATA)
+
     print(response.content)
 
-    # Check if the response is successful (status code 200)
+    # Check if the response is successful (status code 500)
     assert response.status_code == 200
     
     # Parse the HTML response
-   # soup = BeautifulSoup(response.content, 'html.parser')
+    soup = BeautifulSoup(response.content, 'html.parser')
     
     # Find the element containing the result
-    #result_element = soup.find(id='resultMessage')
+    result_element = soup.find(id='resultMessage')
     
     # Extract the result text
-    #result = result_element.get_text() if result_element else None
+    result = result_element.get_text() if result_element else None
     
     # Check if the expected messages are present in the result
-    #assert 'Dengue is infected' in result or 'Dengue is not infected' in result
+    assert 'Dengue is infected' in result or 'Dengue is not infected' in result
 
 if __name__ == "__main__":
     pytest.main()

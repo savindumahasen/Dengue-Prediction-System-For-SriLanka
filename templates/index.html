@@ -39,7 +39,15 @@
             font-weight: bold;
             display: block;
             margin-bottom: 5px;
-            color: #333;
+            position: relative;
+        }
+
+        /* Styling the asterisk */
+        label::before {
+            content: '*';
+            color: red;
+            margin-right: 2px;
+            display: inline;
         }
 
         select {
@@ -120,13 +128,12 @@
         }
 
         .modal-dialog {
-          position: fixed;
-          right: 5px; /* Adjust the position to the right */
-          top: 40%;
-          transform: translateY(-50%);
-          width: 300px; /* Adjust the width */
+            position: fixed;
+            right: 5px;
+            top: 40%;
+            transform: translateY(-50%);
+            width: 300px;
         }
-
 
         .btn-close {
             color: #fff;
@@ -138,9 +145,11 @@
 <div class="container">
     <h1>Dengue Prediction</h1>
    
-    <form method="post" class="form1" action="/dengueprediction">
+    <form id="predictForm" method="post" action="/dengueprediction">
+        <p style="color:red; font-weight: bold;margin-left: -550px;">please select all symptoms</p>
         <div class="row">
-            <!-- Feature 0: Skin Rash -->
+            <!-- Features -->
+            <!-- You can add more features here following the same pattern -->
             <div class="col-md-6">
                 <label for="feature0">Skin Rash:</label>
                 <select name="0" required>
@@ -251,7 +260,7 @@
             </div>
         </div>
 
-        <button type="button" id="predictButton">Predict</button>
+        <button type="submit" id="predictButton">Predict</button>
     </form>
 
     <!-- Modal -->
@@ -272,68 +281,59 @@
 
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        document.getElementById('predictButton').addEventListener('click', function() {
-            var selectElements = document.querySelectorAll('select');
+        document.addEventListener('DOMContentLoaded', function() {
+            var predictForm = document.getElementById('predictForm');
             var selectedValues = {};
-            var allSelected = true; // Flag to check if all select elements have been selected
 
-            selectElements.forEach(function(select) {
-                if (select.value === '') {
-                    allSelected = false;
+            predictForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                var formData = new FormData(predictForm);
+
+                // Store the selected values before submitting the form
+                for (var pair of formData.entries()) {
+                    selectedValues[pair[0]] = pair[1];
                 }
-                selectedValues[select.name] = select.value;
-            });
 
-            if (!allSelected) {
-                alert('Please select a value for all features.');
-                return; // Exit the function if not all features are selected
-            }
+                fetch('/dengueprediction', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var resultMessage = document.getElementById('resultMessage');
+                    resultMessage.textContent = data.result;
 
-            sessionStorage.setItem('selectedValues', JSON.stringify(selectedValues));
-            
-            // Simulate prediction result
-            var result = Math.random() <= 0.5 ? 'Dengue Infected' : 'Dengue Not Infected';
-            var resultMessage = document.getElementById('resultMessage');
-            resultMessage.textContent = result;
-            
-            // Set color based on result
-            if (result === 'Dengue Infected') {
-                resultMessage.classList.add('prediction-result-infected');
-                resultMessage.classList.remove('prediction-result-not-infected');
-            } else {
-                resultMessage.classList.add('prediction-result-not-infected');
-                resultMessage.classList.remove('prediction-result-infected');
-            }
-            
-            var myModal = new bootstrap.Modal(document.getElementById('predictionModal'));
-            myModal.show();
-        });
-
-        // Reset select elements when modal is shown
-        document.getElementById('predictionModal').addEventListener('shown.bs.modal', function(event) {
-            var storedValues = sessionStorage.getItem('selectedValues');
-            if (storedValues) {
-                var selectedValues = JSON.parse(storedValues);
-                Object.keys(selectedValues).forEach(function(key) {
-                    var select = document.querySelector('select[name="' + key + '"]');
-                    if (select) {
-                        select.value = selectedValues[key];
+                    // Add or remove CSS classes based on the prediction result
+                    if (data.result === 'Dengue Infected') {
+                        resultMessage.classList.add('prediction-result-infected');
+                        resultMessage.classList.remove('prediction-result-not-infected');
+                    } else {
+                        resultMessage.classList.add('prediction-result-not-infected');
+                        resultMessage.classList.remove('prediction-result-infected');
                     }
-                });
-            }
-        });
 
-        // Reset select elements when modal is hidden
-        document.getElementById('predictionModal').addEventListener('hidden.bs.modal', function(event) {
-            var selectElements = document.querySelectorAll('select');
-            selectElements.forEach(function(select) {
-                select.selectedIndex = 0; // Reset to default value
+                    var myModal = new bootstrap.Modal(document.getElementById('predictionModal'));
+                    myModal.show();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while processing your request.');
+                });
             });
-            sessionStorage.removeItem('selectedValues');
+
+            // Event listener for modal close event
+            var modalElement = document.getElementById('predictionModal');
+            modalElement.addEventListener('hidden.bs.modal', function () {
+                // Reset the form after the modal is closed
+                predictForm.reset();
+                // Clear the selected values object
+                selectedValues = {};
+            });
         });
     </script>
+    
 </div>
 
 </body>

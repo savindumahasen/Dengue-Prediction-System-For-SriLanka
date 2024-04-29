@@ -13,7 +13,7 @@ def test_predict_route(capsys):
     # Send a POST request to the predict route with sample input data
     response = requests.post(f'{BASE_URL}/dengueprediction', data=SAMPLE_INPUT_DATA)
     
-    # Check if the response is successful (status code 200)
+    # Check if the response is successful (status code 500)
     assert response.status_code == 200
     
     # Extract the result from the response text
